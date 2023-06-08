@@ -1,0 +1,304 @@
+###
+
+# curl -X 'POST'
+#  'http://localhost:8080/validate'
+#  -H 'accept: text/plain'
+#  -H 'Content-Type: application/json'
+#  -d '{
+#  "apiVersion": "string",
+#  "kind": "string",
+#  "request": {
+#    "dryRun": true,
+#    "kind": {
+#      "group": "string",
+#      "kind": "string",
+#      "version": "string"
+#    },
+#    "name": "string",
+#    "namespace": "string",
+#    "_object": {
+#      "additionalProp1": "string",
+#      "additionalProp2": "string",
+#      "additionalProp3": "string"
+#    },
+#    "oldObject": {
+#      "additionalProp1": "string",
+#      "additionalProp2": "string",
+#      "additionalProp3": "string"
+#    },
+#    "operation": "string",
+#    "options": {
+#      "additionalProp1": "string",
+#      "additionalProp2": "string",
+#      "additionalProp3": "string"
+#    },
+#    "requestKind": {
+#      "group": "string",
+#      "kind": "string",
+#      "version": "string"
+#    },
+#    "requestResource": {
+#      "group": "string",
+#      "resource": "string",
+#      "version": "string"
+#    },
+#    "requestSubResource": "string",
+#    "resource": {
+#      "group": "string",
+#      "resource": "string",
+#      "version": "string"
+#    },
+#    "subResource": "string",
+#    "uid": "string",
+#    "userInfo": {
+#      "extra": {
+#        "additionalProp1": [
+#          "string"
+#        ],
+#        "additionalProp2": [
+#          "string"
+#        ],
+#        "additionalProp3": [
+#          "string"
+#        ]
+#      },
+#      "groups": [
+#        "string"
+#      ],
+#      "uid": "string",
+#      "username": "string"
+#    },
+#    "object": {
+#      "additionalProp1": "string",
+#      "additionalProp2": "string",
+#      "additionalProp3": "string"
+#    }
+#  },
+#  "response": {
+#    "allowed": true,
+#    "auditAnnotations": {
+#      "additionalProp1": "string",
+#      "additionalProp2": "string",
+#      "additionalProp3": "string"
+#    },
+#    "patch": "string",
+#    "patchType": "string",
+#    "status": {
+#      "apiVersion": "string",
+#      "code": 0,
+#      "details": {
+#        "causes": [
+#          {
+#            "field": "string",
+#            "message": "string",
+#            "reason": "string"
+#          }
+#        ],
+#        "group": "string",
+#        "kind": "string",
+#        "name": "string",
+#        "retryAfterSeconds": 0,
+#        "uid": "string"
+#      },
+#      "kind": "string",
+#      "message": "string",
+#      "metadata": {
+#        "_continue": "string",
+#        "remainingItemCount": 0,
+#        "resourceVersion": "string",
+#        "selfLink": "string",
+#        "continue": "string"
+#      },
+#      "reason": "string",
+#      "status": "string"
+#    },
+#    "uid": "string",
+#    "warnings": [
+#      "string"
+#    ]
+#  }
+#}'
+POST http://localhost:8080/validate
+accept: application/json
+Content-Type: application/json
+
+{
+  "apiVersion": "admission.k8s.io/v1",
+  "kind": "AdmissionReview",
+  "request": {
+    "dryRun": false,
+    "kind": {
+      "group": "",
+      "kind": "Pod",
+      "version": "v1"
+    },
+    "name": "non-smooth-app",
+    "namespace": "default",
+    "oldObject": null,
+    "operation": "CREATE",
+    "options": {
+      "kind": "CreateOptions",
+      "apiVersion": "meta.k8s.io/v1",
+      "fieldManager": "kubectl-create",
+      "fieldValidation": "Strict"
+    },
+    "requestKind": {
+      "group": "",
+      "kind": "Pod",
+      "version": "v1"
+    },
+    "requestResource": {
+      "group": "",
+      "resource": "pods",
+      "version": "v1"
+    },
+    "requestSubResource": null,
+    "resource": {
+      "group": "",
+      "resource": "pods",
+      "version": "v1"
+    },
+    "subResource": null,
+    "uid": "e3b9f340-3b23-4520-b96e-bc582522496d",
+    "userInfo": {
+      "extra": null,
+      "groups": [
+        "system:masters",
+        "system:authenticated"
+      ],
+      "uid": null,
+      "username": "kubernetes-admin"
+    },
+    "object": {
+      "kind": "Pod",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "non-smooth-app",
+        "namespace": "default",
+        "uid": "8315ad6b-36a3-43ad-a5fb-cb38b2a26a3f",
+        "creationTimestamp": "2023-06-08T12:57:14Z",
+        "managedFields": [
+          {
+            "manager": "kubectl-create",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2023-06-08T12:57:14Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"non-smooth-app\"}": {
+                    ".": {},
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:name": {},
+                    "f:resources": {},
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {}
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:enableServiceLinks": {},
+                "f:restartPolicy": {},
+                "f:schedulerName": {},
+                "f:securityContext": {},
+                "f:terminationGracePeriodSeconds": {}
+              }
+            }
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "kube-api-access-25l92",
+            "projected": {
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "name": "kube-root-ca.crt",
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "path": "namespace",
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "non-smooth-app",
+            "image": "busybox",
+            "resources": {},
+            "volumeMounts": [
+              {
+                "name": "kube-api-access-25l92",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "securityContext": {},
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          },
+          {
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "effect": "NoExecute",
+            "tolerationSeconds": 300
+          }
+        ],
+        "priority": 0,
+        "enableServiceLinks": true,
+        "preemptionPolicy": "PreemptLowerPriority"
+      },
+      "status": {
+        "phase": "Pending",
+        "qosClass": "BestEffort"
+      }
+    }
+  },
+  "response": null
+}
+
+###
+

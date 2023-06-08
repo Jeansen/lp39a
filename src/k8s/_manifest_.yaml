@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lp39a
+  namespace: default
+  labels:
+    name: lp39a
+spec:
+  ports:
+  - name: webhook
+    port: 443
+    targetPort: 8443
+  selector:
+    name: lp39a
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lp39a
+  namespace: default
+  labels:
+    name: lp39a
+spec:
+  selector:
+    matchLabels:
+      name: lp39a
+  replicas: 1
+  template:
+    metadata:
+      name: lp39a
+      labels:
+        name: lp39a
+    spec:
+      containers:
+        - name: webhook
+          image: $REGISTRY
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/certs
+              readOnly: true
+            - name: logs
+              mountPath: /tmp
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: lp39a
+        - name: logs
+          emptyDir: {}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: lp39a
+webhooks:
+  - name: lp39a.k8s.lab
+    clientConfig:
+      service:
+        name: lp39a
+        namespace: default
+        path: "/validate"
+      caBundle: "${CA_BUNDLE}"
+    rules:
+      - operations: ["CREATE","UPDATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    failurePolicy: Ignore
+    admissionReviewVersions: ["v1"]
+    sideEffects: None

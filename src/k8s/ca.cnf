@@ -1,0 +1,31 @@
+[ req ]
+default_bits       = 2048
+default_md         = sha512
+default_keyfile    = ca.key
+prompt             = no
+encrypt_key        = yes
+
+# base request
+distinguished_name = req_distinguished_name
+
+# extensions
+req_extensions     = v3_req
+
+# distinguished_name
+[ req_distinguished_name ]
+countryName            = "DE"                     # C=
+stateOrProvinceName    = "Somewhere"              # ST=
+localityName           = "Nowhere"                # L=
+postalCode             = "42000"                  # L/postalcode=
+streetAddress          = "Bricks Rd. 1"           # L/street=
+organizationName       = "K8S"                    # O=
+organizationalUnitName = "R&D"                    # OU=
+commonName             = "k8s.lab"                # CN=
+emailAddress           = "no-reply@k8s.lab"       # CN/emailAddress=
+
+# req_extensions
+[ v3_req ]
+# The subject alternative name extension allows various literal values to be 
+# included in the configuration file
+# http://www.openssl.org/docs/apps/x509v3_config.html
+subjectAltName  = DNS:example.k8s.lab
