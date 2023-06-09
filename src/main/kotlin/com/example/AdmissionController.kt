@@ -12,9 +12,9 @@ import jakarta.ws.rs.core.MediaType
 import org.jboss.logging.Logger
 
 @Path("/")
-class ExampleResource {
+class AdmissionController {
 
-    private val LOG: Logger = Logger.getLogger(ExampleResource::class.java)
+    private val LOG: Logger = Logger.getLogger(AdmissionController::class.java)
 
     @POST
     @Path("/validate")

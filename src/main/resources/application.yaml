@@ -1,0 +1,28 @@
+quarkus:
+  smallrye-openapi:
+    path: /swagger
+  swagger-ui:
+    always-include: true
+  http:
+#    insecure-requests: disabled
+    host: 0.0.0.0
+    ssl:
+      certificate:
+        files: /pki/lp39a-crt.pem
+        key-files: /pki/lp39a-key.pem
+    ssl-port: 8443
+  container-image:
+    group:
+    username:
+    password:
+    registry:
+    name: lp39a
+    additional-tags: latest
+    push: false
+    builder: jib
+    build: true
+    insecure: true
+  native:
+    container-build: true
+  package:
+    type: native
